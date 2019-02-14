@@ -1,33 +1,33 @@
 UPPERCASE = ('A'..'Z').to_a
 LOWERCASE = ('a'..'z').to_a
-NUMBER    = ('0'..'9').to_a
+NUMBER = ('0'..'9').to_a
 
 CONDITIONS = [UPPERCASE, LOWERCASE, NUMBER]
 
 def generate_password
-    size = rand(10 - 6) + 6
-    pass = " " * size
-    
-    conditions_missing = Set.new(0...CONDITIONS.length)
-    
-    for i in (0...size-CONDITIONS.length-1)
-        condition_index = rand(CONDITIONS.length - 1)
-        condition = CONDITIONS[condition_index]
-        conditions_missing.delete(condition_index) 
+  size = rand(10 - 6) + 6
+  pass = " " * size
 
-        pass[i] = condition.sample
-    end
+  conditions_missing = Set.new(0...CONDITIONS.length)
 
-    for missing_condition in conditions_missing
-	condition = CONDITIONS[missing_condition]
-        pass[i] = condition.sample
-	i += 1
-    end
+  for i in (0...size - CONDITIONS.length - 1)
+    condition_index = rand(CONDITIONS.length - 1)
+    condition = CONDITIONS[condition_index]
+    conditions_missing.delete(condition_index)
 
-    while i < size
-        pass[i] = CONDITIONS.sample.sample
-        i += 1
-    end
+    pass[i] = condition.sample
+  end
 
-    pass
+  for missing_condition in conditions_missing
+    condition = CONDITIONS[missing_condition]
+    pass[i] = condition.sample
+    i += 1
+  end
+
+  while i < size
+    pass[i] = CONDITIONS.sample.sample
+    i += 1
+  end
+
+  pass
 end
